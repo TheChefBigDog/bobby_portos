@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'My Portfolio',
+      title: 'Bobby Ryan',
       theme: ThemeData(primarySwatch: Colors.deepPurple),
       initialBinding: PortfolioBinding(),
       home: PortfolioView(),
