@@ -181,7 +181,7 @@ class _HeroText extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Hey, I'm Bobby Ryan Hartono.", style: h1),
+          Text("Hey, I'm Bobby Ryan.", style: h1),
           const SizedBox(height: 10),
           Row(
             mainAxisSize: MainAxisSize.min,
