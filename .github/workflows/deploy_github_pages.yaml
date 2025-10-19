@@ -22,7 +22,7 @@ jobs:
         run: flutter pub get
 
       - name: Build web
-        run: flutter build web --release --base-href /Portfolio/
+        run: flutter build web --release --base-href /bobby_portos/
 
       - name: Add 404.html
         run: cp build/web/index.html build/web/404.html
