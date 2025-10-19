@@ -1,7 +1,7 @@
 import 'package:bobby_portfolio/constant/app_asset.dart';
 import 'package:bobby_portfolio/modules/portfolio/portfolio_controller.dart';
-import 'package:bobby_portfolio/views/feature/on_boarding.dart';
 import 'package:bobby_portfolio/views/feature/career_journey.dart';
+import 'package:bobby_portfolio/views/feature/on_boarding.dart';
 import 'package:bobby_portfolio_package/navbar/template/nav_template.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +31,7 @@ class PortfolioView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  BloodSection(
+                  OnBoardingSection(
                     onDownPressed: () {
                       Scrollable.ensureVisible(
                         careerJourneyKey.currentContext!,
