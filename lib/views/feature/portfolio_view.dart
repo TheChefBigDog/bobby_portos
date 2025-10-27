@@ -24,6 +24,7 @@ class PortfolioView extends StatelessWidget {
         child: PortfolioHeader(heightFraction: 0.12, logoAsset: AppAssets.myName),
       ),
       body: GetBuilder<PortfolioController>(
+        init: PortfolioController(),
         builder: (controller) {
           return SingleChildScrollView(
             controller: scrollController,
@@ -32,6 +33,9 @@ class PortfolioView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   OnBoardingSection(
+                    openWhatsApp: () {
+                      controller.openWhatsApp();
+                    },
                     onDownPressed: () {
                       Scrollable.ensureVisible(
                         careerJourneyKey.currentContext!,

@@ -8,4 +8,6 @@ class AppAssets {
   static const String reactNativeIcon = 'assets/images/ic_react.png';
   static const String sinarmasIcon = 'assets/images/ic_sinarmas.png';
   static const String mobilecomIcon = 'assets/images/ic_mobilecom.jpg';
+  static const String whatsappIcon = 'assets/images/ic_whatsapp.png';
+  static const String githubIcon = 'assets/images/ic_github.jpg';
 }
