@@ -1,40 +1,13 @@
 import 'package:bobby_portfolio/constant/app_asset.dart';
+import 'package:bobby_portfolio_package/bouncing_chevron/index.dart';
 import 'package:bobby_portfolio_package/index.dart';
 import 'package:flutter/material.dart';
 
-class OnBoardingSection extends StatefulWidget {
+class OnBoardingSection extends StatelessWidget {
   final VoidCallback? onDownPressed;
   final VoidCallback? openWhatsApp;
 
   const OnBoardingSection({super.key, this.onDownPressed, this.openWhatsApp});
-
-  @override
-  State<OnBoardingSection> createState() => _OnBoardingSectionState();
-}
-
-class _OnBoardingSectionState extends State<OnBoardingSection> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _bounceAnimation;
-
-  get openWhatsApp => null;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(duration: const Duration(milliseconds: 800), vsync: this)
-      ..repeat(reverse: true);
-
-    _bounceAnimation = Tween<double>(
-      begin: 0,
-      end: 12,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +66,7 @@ class _OnBoardingSectionState extends State<OnBoardingSection> with SingleTicker
                             h1: h1Style,
                             roleBase: h3Style,
                             isNarrow: isNarrow,
-                            url: () => openWhatsApp(),
+                            url: openWhatsApp,
                           ),
                           const SizedBox(height: 24),
                         ],
@@ -108,7 +81,7 @@ class _OnBoardingSectionState extends State<OnBoardingSection> with SingleTicker
                                 h1: h1Style,
                                 roleBase: h3Style,
                                 isNarrow: isNarrow,
-                                url: () => openWhatsApp(),
+                                url: openWhatsApp,
                               ),
                             ),
                           ),
@@ -123,18 +96,7 @@ class _OnBoardingSectionState extends State<OnBoardingSection> with SingleTicker
             bottom: size.height * 0.11,
             left: 0,
             right: 0,
-            child: Center(
-              child: AnimatedBuilder(
-                animation: _bounceAnimation,
-                builder: (context, _) => Transform.translate(
-                  offset: Offset(0, -_bounceAnimation.value),
-                  child: IconButton(
-                    onPressed: widget.onDownPressed,
-                    icon: const Icon(Icons.keyboard_arrow_down, size: 48, color: Colors.red),
-                  ),
-                ),
-              ),
-            ),
+            child: Center(child: BouncingChevron(onPressed: onDownPressed)),
           ),
         ],
       ),
