@@ -1,12 +1,12 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bobby_portfolio/constant/app_asset.dart';
+import 'package:bobby_portfolio_package/index.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class OnBoardingSection extends StatefulWidget {
   final VoidCallback? onDownPressed;
+  final VoidCallback? openWhatsApp;
 
-  const OnBoardingSection({super.key, this.onDownPressed});
+  const OnBoardingSection({super.key, this.onDownPressed, this.openWhatsApp});
 
   @override
   State<OnBoardingSection> createState() => _OnBoardingSectionState();
@@ -15,6 +15,8 @@ class OnBoardingSection extends StatefulWidget {
 class _OnBoardingSectionState extends State<OnBoardingSection> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _bounceAnimation;
+
+  get openWhatsApp => null;
 
   @override
   void initState() {
@@ -34,31 +36,10 @@ class _OnBoardingSectionState extends State<OnBoardingSection> with SingleTicker
     super.dispose();
   }
 
-  Future<void> _openWhatsApp() async {
-    final uri = Uri.parse('https://wa.me/62859211150899');
-    if (await canLaunchUrl(uri)) await launchUrl(uri);
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isNarrow = size.width < 900;
-
-    final h1Style = TextStyle(
-      fontFamily: 'Roboto',
-      fontSize: isNarrow ? 28 : 36,
-      fontWeight: FontWeight.w800,
-      color: Colors.white,
-      height: 1.2,
-      shadows: const [Shadow(blurRadius: 6, color: Colors.black54)],
-    );
-
-    final roleBase = TextStyle(
-      fontFamily: 'Roboto',
-      fontSize: isNarrow ? 18 : 22,
-      fontWeight: FontWeight.w700,
-      height: 1.3,
-    );
 
     return SizedBox(
       width: double.infinity,
@@ -108,11 +89,11 @@ class _OnBoardingSectionState extends State<OnBoardingSection> with SingleTicker
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _HeroText(
+                          HeroText(
                             h1: h1Style,
-                            roleBase: roleBase,
+                            roleBase: h3Style,
                             isNarrow: isNarrow,
-                            openWhatsApp: _openWhatsApp,
+                            url: () => openWhatsApp(),
                           ),
                           const SizedBox(height: 24),
                         ],
@@ -123,11 +104,11 @@ class _OnBoardingSectionState extends State<OnBoardingSection> with SingleTicker
                             flex: 5,
                             child: Align(
                               alignment: Alignment.centerLeft,
-                              child: _HeroText(
+                              child: HeroText(
                                 h1: h1Style,
-                                roleBase: roleBase,
+                                roleBase: h3Style,
                                 isNarrow: isNarrow,
-                                openWhatsApp: _openWhatsApp,
+                                url: () => openWhatsApp(),
                               ),
                             ),
                           ),
@@ -154,77 +135,6 @@ class _OnBoardingSectionState extends State<OnBoardingSection> with SingleTicker
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _HeroText extends StatelessWidget {
-  const _HeroText({
-    required this.h1,
-    required this.roleBase,
-    required this.isNarrow,
-    required this.openWhatsApp,
-  });
-
-  final TextStyle h1;
-  final TextStyle roleBase;
-  final bool isNarrow;
-  final Future<void> Function() openWhatsApp;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text("Hey, I'm Bobby Ryan.", style: h1),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            children: [
-              Text("I'm a ", style: roleBase.copyWith(color: Colors.white70)),
-              DefaultTextStyle(
-                style: roleBase.copyWith(color: Colors.red, decoration: TextDecoration.underline),
-                child: AnimatedTextKit(
-                  repeatForever: true,
-                  pause: const Duration(milliseconds: 900),
-                  animatedTexts: [
-                    TyperAnimatedText(
-                      'builder of digital experiences',
-                      speed: Duration(milliseconds: 90),
-                    ),
-                    TyperAnimatedText('developer', speed: Duration(milliseconds: 90)),
-                    TyperAnimatedText('tech explorer', speed: Duration(milliseconds: 90)),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red[900],
-                  padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  elevation: 6,
-                ),
-                onPressed: openWhatsApp,
-                child: const Text(
-                  'Contact Me',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
-            ],
           ),
         ],
       ),
